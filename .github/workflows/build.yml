@@ -20,6 +20,14 @@ jobs:
           flutter-version: '3.19.6'
           channel: 'stable'
 
+      - name: Fix Android embedding v2
+        run: |
+          cat > android/app/src/main/kotlin/com/devarsh/ai_assistant/MainActivity.kt << 'EOF'
+          package com.devarsh.ai_assistant
+          import io.flutter.embedding.android.FlutterActivity
+          class MainActivity: FlutterActivity()
+          EOF
+
       - name: Install dependencies
         run: flutter pub get
 
@@ -31,4 +39,3 @@ jobs:
         with:
           name: devarsh-ai-assistant
           path: build/app/outputs/flutter-apk/app-release.apk
-          
